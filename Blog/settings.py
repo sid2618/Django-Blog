@@ -127,6 +127,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ALLOWED_HOSTS = ['*']
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # ✔️
+CSRF_TRUSTED_ORIGINS = [
+   
+    'https://sids-django-blog.onrender.com',  # if hosted on render.com
+]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # 
 
     

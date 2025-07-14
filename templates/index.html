@@ -56,68 +56,55 @@
 
 
 
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><h2>Sid's Blog</h2></a>
 
-      <div class="header">
+    <!-- Toggle button for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <a class="nav-link active" aria-current="page" href="/"><h2>Sid's Blog</h2></a>
-        
-      </div>
-      
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <!-- <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-          </li> -->
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-          {% if user.is_authenticated%}
+        {% if user.is_authenticated %}
+        <li class="nav-item dropdown mx-1">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Welcome {{ request.user }}
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+          </ul>
+        </li>
+        {% else %}
+        <li class="nav-item mx-1">
+          <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#signupModal">
+            Sign Up
+          </button>
+        </li>
+        <li class="nav-item mx-1">
+          <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#loginModal">
+            Login
+          </button>
+        </li>
+        {% endif %}
 
-          <li class="nav-item dropdown mx-1">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Welcome  {{request.user}}
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/logout">Logout</a></li>
-             
-            </ul>
-          </li>
-          
-          {% else %}
-          
-          <li class="nav-item">
-            <!-- Button to trigger signup modal -->
-            <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#signupModal">
-              Sign Up
-            </button>
-            
-          </li>
+      </ul>
 
-          <li class="nav-item">
-            <!-- Button to trigger login modal -->
-            <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#loginModal">
-              Login
-            </button>
-            
-          </li>
-          {% endif %}
-
-        </ul>
-
-
-        <form method="get" action="/search" class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" name="query" id="query"
-            aria-label="Search" />
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-
-
-
-
-
-      </div>
+      <form method="get" action="/search" class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" name="query" id="query"
+          aria-label="Search" />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
     </div>
-  </nav>
+  </div>
+</nav>
+
 
   {% for msg in messages %}
 
@@ -214,11 +201,7 @@
           <form action='/login' method='post'  >
 
             {% csrf_token %}
-            <!-- <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
-              
-            </div> -->
+            
 
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
@@ -231,10 +214,7 @@
               <input type="password" class="form-control" id="password" name="loginpassword" required>
             </div>
 
-            <!-- <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
-              <input type="password" class="form-control" id="password2"  name="password">
-            </div> -->
+            
             
             <button type="submit" class="btn btn-primary">login</button>
           </form>
